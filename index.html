@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	
+		<style>
+			p {
+				font-family: 'Raleway', sans-serif;
+			}
+		</style>
+
+	</head>
+	<body>
+		<h1>JavaScript</h1>
+		<h2>Objects</h2>
+		<p>Objects in JavaScript are best written in the following manner:</p>
+
+		<pre>
+var TypeName = function() {
+    <span class="dim">this = Object.create(TypeName.prototype);</span>
+    this.numberOne = 10;
+    this.numberTwo = 20;
+
+
+    <span class="dim">return this;</span>
+}
+		</pre>
+
+	<p>
+		Note that the dimmed lines, one at the beginning and one at the end of this constructor function aren't actually typed by the programmer. You can, however, imagine that these lines are there as the interpretter will put them there, and should aid your understanding of objects in JavaScript. Note that they are only there when you use the keyword new to instantiate an object of this type.
+	</p>
+
+	<p>
+		When you use they keyword new for the above constructor function, you will get a new object with its own set of the defined properties. If you were to add functions in the same way as you have ivars, however, you would also end up with a copy of each function on every single object that you create, which is ineffecient. Instead we use prototypes for methods.
+	</p>
+	<p>
+		What is a prototype? A prototype is just an object that lives on every function. It exists so you have somewhere to put your methods outside of the constructor function.
+	</p>
+
+<pre>
+var TypeName = function() {
+    <span class="dim">this = Object.create(TypeName.prototype);</span>
+    this.numberOne = 10;
+    this.numberTwo = 20;
+
+
+    <span class="dim">return this;</span>
+}
+
+TypeName.prototype.getNumberOne = function() {
+    return this.numberOne;	
+};
+
+		</pre>
+		<p>
+			Note that the this keyword is used here based on the assumption that you will be calling this method on an instance of TypeName. 
+		</p>
+		<h2>Inheritance</h2>
+
+	</body>
+
+
+</html>
