@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	
+		<style>
+	
+		</style>
+
+	</head>
+	<body>
+		<h1>Presenting Views</h1>
+		<h2>Stock Views</h2>
+		<h3>Image Picker</h3>
+		<p>
+		Note that in order for this to work you need to add a new property to Info.plist. Add it with the key "Privacy - Photo Library Usage Description". I just put "Just testing!" in for the value and it seemed to satisfy the compiler.
+		</p>
+		<code>
+			<pre>
+@IBAction func experiment() {
+	let controller = UIImagePickerController()
+	self.present(controller, animate: true, completion: nil)
+}
+			</pre>
+		</code>
+		
+		<h3>Activity View</h3>
+		<code>
+			<pre>
+@IBAction func experiment() {
+	let image = UIImage()
+	let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+	self.presentViewController(controller, animate: true, completion: nil)
+}
+			</pre>
+		</code>
+
+
+		<h3>Alert Views</h3>
+		<code>
+		<pre>
+@IBAction func experiment() {
+	let controller = UIAlertController()
+	controller.title = "Test alert"
+	controller.message = "This is a test"
+
+	let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.default) { action in
+		self.dismiss(true, completion: nil)
+	}
+
+	controller.addAction(okAction)
+	self.presentViewController(controller, animated: true, completion: nil)
+}
+		</pre>
+		</code>
+
+		<h2>Custom View Controllers</h2>
+		<h3>Entirely Programatically</h3>
+		First you need to have created your view controller from the storyboard. You should also ensure it has a Storyboard ID set from its identity inspector.
+		<code>
+			<pre>
+@IBAction func rollTheDice() {
+	var controller: DiceViewController
+	controller = self.storyboard?.instantiateViewController(withIdentifier: "DiceViewController") as! DiceViewController
+
+	// Set anything you need to set on the opening view controller here
+	controller.firstValue = self.randomDiceValue()
+	controller.secondValue = self.randomDiceValue()
+
+	present(controller, animated: true, completion: nil)
+}
+	</pre>
+		</code>
+		<h3>Combining Code with Storyboard</h3>
+		<ol>
+			<li>
+				Open the popup for the view you're coming from. This can be accessed by holding Ctrl and clicking on the view controller icon at the top of the UI design canvas.
+			</li>
+			<li>
+				Under Triggered Segues, select manual and drag it to the view controller you want to segue to. Select modal when given the options. Not sure what the others do yet.
+			</li>
+			<li>
+				Go to the attributes inspector for the segue and set the identifier. Call it rollDice here.
+			</li>
+		</ol>
+		<code>
+		<pre>
+@IBAction func rollTheDice() {
+	performSegueWithIdentifier(identifier: "rollDice", sender: self)
+}
+	</pre>
+		</code>
+		Note that at this point we don't have an instance of the view in order to be able to set any instance variables. This means it could crash if using the variables.
+
+		<h3>Entirely with Storyboard</h3>
+
+		<p>
+			Ctrl drag from the button to the view you want to display and select modal. This will work to display the view controller, but you still have no communication to set variable members on the displayed view controller.
+		</p>
+		<p>
+		The way around this is to override the prepareForSegue() function. You can grab the view controller to be displayed and set its instance variables in there.
+		</p>
+
+
+
+
+		<p>
+		TODO: 
+
+		Style. Divs around code, some colouring. Fonts. Maybe even a header and footer. Also, go through the tutorials again and update the code from the video. Come up with a colour scheme. At the very least, work out what should be coloured.
+		</p>
+
+		<p>
+		Run through the code on the mac. See if it works. When it doesn't, change the code to the updated code and use screenshots instead? No, don't use screenshots. Control loss.
+		</p>
+
+	</body>
+
+
+</html>
