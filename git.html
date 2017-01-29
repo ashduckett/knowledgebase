@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	
+		<style>
+	
+		</style>
+
+	</head>
+	<body>
+		<h1>Automatically Comparing Files</h1>
+		<h2>Windows</h2>
+		<p>
+			You have a tool in the command prompt called <code>FC</code>. This stands for file compare.
+		</p>
+		<p>
+			<code>FC favourite-app-old.html favourite-app-new.html</code>
+		</p>
+		<img src="fc_example.png">
+
+		<h2>Mac or Linux</h2>
+		<p>
+			In this case, you have a tool called <code>diff</code>.
+		</p>
+		<p>
+			<code>$ diff -u favourite-app-old.html favourite-app-new.html</code>
+		</p>
+		<p>
+			<code>-u</code> gives you a unified diff format and should make things easier to read.
+		</p>
+		<img src="diff_example.png">
+
+		<p>
+		Lines with no plus or minus sign next to them have not changed, so they are in the old and new versions of the code.
+		</p>
+		<p>
+		Lines with a minus sign were removed. This will mean they were in the old version, but not the new version of the file.
+		</p>
+		<p>
+		Lines with a plus sign were added. So they were not in the old version of the file, but they are in the new one.
+		</p>
+
+<table style="width:100%">
+  <tr>
+    <th>Linux Command</th>
+    <th>Meaning</th>
+  </tr>
+  <tr>
+    <td>mkdir dirname</td>
+    <td>Create a new directory with the name dirname</td>
+  </tr>
+  <tr>
+    <td>pwd</td>
+    <td>Print the currend directory you're in</td>
+  </tr>
+    <tr>
+    <td>ls</td>
+    <td>List the files in the current directory</td>
+  </tr>
+</table>
+
+<table style="width:100%">
+  <tr>
+    <th>Git Command</th>
+    <th>Meaning</th>
+  </tr>
+  <tr>
+    <td>git diff idA idB</td>
+    <td>Compare idA and idB where idA and idB are commits, starting with the oldest.</td>
+  </tr>
+    <tr>
+    <td>git log</td>
+    <td>TODO</td>
+  </tr>
+      <tr>
+    <td>git log --stat</td>
+    <td>Gives some statistics about which files have changed in each commit. You can now see which files are affected by a commit.</td>
+  </tr>
+  <tr>
+  	<td>git --version</td>
+    <td>Outputs the version of git running.</td>
+  </tr>
+    <tr>
+  	<td>git status</td>
+    <td>This will show the files that have changed since the last commit.</td>
+  </tr>
+</table>
+
+
+	<h1>Viewing a Commit History</h1>		
+	<p>You can view the commit history of a repository using the following command:</p>
+	<p>
+	<code>$ git log</code>
+	</p>
+	<p>
+	You will see every commit that's ever been made, starting with the most recent. You can compare one commit with another using git diff checksumA checksumB.
+	</p>
+	<h1>Got Commits Across Multiple Files</h1>
+	<p>
+	When you work on a project, you'll usually have multiple files that you want to track together. When you save a version of your files, in other words make a commit, you're saving a version of every file in your repository.
+	</p>
+
+	<h1>Cloning a Repo</h1>
+	<p>
+	This can be done easily using git clone url. It will download the repository and its entire history.
+	</p>
+
+	<h1>Checking Out Old Versions of Code</h1>
+	<p>
+		In git, checking out a commit means resetting all of your files to how they were at the time that commit was made.
+	</p>
+	<p>
+	When you do this you will get a warning that says "You are in 'detached HEAD' state." This is nothing to worry about. Head is what git calls the commit you're currently working on and you've detached it here by checkint out an older commit.
+	</p>
+	<p>
+	If you do a git log with an older commit checked out, you will only get the commits up to the point of your current commit.
+	</p>
+	<p>
+	You can still get back to the most recent commit using git checkout checksum, but what if you don't knot he checksum?
+	</p>
+	<h1>Configuring git</h1>
+	<h2>Background and Text Colour</h2>
+	<p>
+		This is easily set using the menu found in the top left hand corner.
+	</p>
+
+	<h2>Enabling Tab Completion and Prompt Features</h2>
+	<p>
+		For this you'll need a couple of files. One is git-completion.bash, which will sort out auto-completion. Put this file in your home directory and make sure it doesn't have a .txt extension. 
+	</p>
+	<p>
+		The second file is git-prompt.sh. Do the same thing with this file and put it in your home directory.
+	</p>
+	<p>
+		The final file should be named <a href="#">.bash_profile</a>. You'll need to open this with a text editor and select all files when you save this or it won't let you save it to the home directory.
+	</p>
+	<h2>Configuring git with Sublime</h2>
+	<p>
+	$ git config --global core.editor "'C:/Program\ Files/Sublime\ Text\ 3/subl.exe' -n -w"
+	</p>
+	<p>
+	Note that the n means open a new window for sublime and the -w means wait for sublime to close and save before letting git move on.
+	</p>
+
+	<h2>Launching your text editor</h2>
+	<p>
+		You should already be able to launch your editor by typeing the full path to it:
+	</p>
+	<p>
+		$ C:/Program\ Files/Sublime\ Text\ 3/subl.exe
+	</p>
+	<p>
+	Add this to your .bash_profile file: alias subl="C:/Program\ Files/Sublime\ Text\ 3/subl.exe"
+	</p>
+	<p>
+		Finally, the following should come in handy later.
+	</p>
+	<p>
+		git config --global push.default upstream
+	</p>
+	<p>
+		git config --global merge.conflictstyle diff3
+
+	</p>
+	<p>
+		Maybe add mac instructions here
+	</p>
+	<h1>Creating and Modifying a Repository</h1>
+	<h2>What makes a repository a repository?</h2>
+	<p>A .git directory</p>
+	<h2>Initialising a Repository</h2>
+	<code>git init</code>
+	<p>
+		There will be no commits in a repository you've just made. If you run git status on a directory with a text file on it where all you've done is run git init, you'll be told you have an untracked file.
+	</p>
+	<h2>Staging Area</h2>
+	<p>
+	We know how to initialise an empty repository. Now we'll talk about adding changes to it. Imagine there are three files in your working directory. You also have an empty git repository.
+	</p>
+	<p>
+	You can't just run git commit to create a snapshot of all your files. Remember, keeping commits small is good, with one commit per logical change. Git allows you to do this by allowing you to specify exactly what changes should be committed.
+	</p>
+	<p>
+	To help with this git provides a staging area. You can add files one at a time to a staging area. When you commit, having staged your changes, git will bundle the entire contents of the staging area into a single commit and add it to the repository.
+	</p>
+	<p>
+	So you might use git status to remember what you've added to the staging area so far. Imagine that you have three untracked files only.
+	</p>
+	<p>
+	You stage two of them. Then you run git status and these files now show up as new files under changes to be committed. That means that the files have been added to the staging area.
+	</p>
+	<p>
+	To stage a file you use git add. If you want to unstage a file, you can remove it with reset file_name. This will remove the file from the staging area.
+	</p>
+
+	<h2>git diff without arguments</h2>
+	<p>
+	Doing this will give you a diff between what's been staged and your working directory. This tells you what work you've done since your last added something to the staging area. Remember that you would normally say diff oldThing newThing. In this case the old thing it the staging area and the new thing is your working directory.
+	</p>
+	<p>
+	You might also want to view the difference between the staging area and the most recent commit in the repository. This will tell you if the files you've added are really the changes you want to make to the repository. You can do this with git diff --staged. This command gives you all of the changes that are currently going to be in your next commit.
+	</p>
+	<p>
+		If you need to reset both the staging area (back to the state of the repository) and the working directory back to the state of the repository, then git reset --hard will do this.
+	</p>
+	</body>
+
+
+</html>
+
+
+We ran git init on our directory with our first reflections file in it.
+We ran git status and were told that we had untracked files.
+We created the second reflections file.
+Running git status at this point tells us that we have two untracked files.
+We add one to the staging area and commit it with a commit message.
+We add another to the staging area and commit it with a commit message.
+We make a change to the second file.
+We add with git add.
+We commit.
+
+Basically at this point everything is committed.
