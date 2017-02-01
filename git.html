@@ -204,7 +204,112 @@
 	<p>
 		If you need to reset both the staging area (back to the state of the repository) and the working directory back to the state of the repository, then git reset --hard will do this.
 	</p>
+
+	<h1>Branches</h1>
+	<p>
+	As I understand them. As you commit to master, the default branch, you're moving the branch head forward. You can checkout commits and you can checkout branches. When you checkout a branch, you'll get the working directory setup to use the state of files as defined by the latest commit on the current branch. When you make a commit having checked out a branch, the label, or branch, will refer to the new commit.
+	</p>
+	<p>
+	When you get a message telling you that you're in a detached head state, it's telling you that you're on an unlabled commit. For you to be on a branch and not in a detached head state, you'd need to be on the tip of the branch. I believe that this is significant because as you go through a branch history, you'll go through from the tip of the branch, what the branch name refers to, all the way back to the initial commit. This won't include any commits you make whilst in a detached head state since a commit can only have one parent and any commit you made in the detached head state won't be one of them.
+	</p>
+	<p>
+		git branch will show you all of the branches in your repository.
+	</p>
+	<p>
+		git branch nameHere will create a new branch with the name nameHere. If you were to run git branch without any arguments again, you'll see your new branch. You'll see a star next to the currently checked out branch. This is the one that will update if you make a change.
+	</p>
+	<p>
+	If you do git checkout branchName, you'll checkout the branch. If you then do git branch again, you'll see that you've checked out that new branch.
+	</p>
+	<p>
+	Immediately after creating a branch, it will have the same code as the branch on which you created it initially.
+	</p>
+	<h1>Merging</h1>
+	<p>
+		Imagine that you want to merge the following and that each letter is a line of code. Two people start with the same version of a file. Each person makes some changes. They might add some lines, or remove some lines. Here is Jake's version at the end of the day:
+	</p>
+	<ul>
+		<li>B</li>
+		<li>D</li>
+		<li>E</li>
+	</ul>
+	<p>Here's Rachel's version at the end of the day:</p>
+	<ul>
+		<li>A</li>
+		<li>B</li>
+		<li>C</li>
+		<li>D</li>
+	</ul>
+	<p>Looking at the above, how would you merge the two versions of the file together?</p>
+	<p>One way to think about it is:</p>
+	<ul>
+		<li>B and D ara in both versions so it should be in the final file</li>
+		<li>A is in Rachel's version, but not Jake's. This means either Rachel added it to the original, or Jake removed it. We don't know which so we can't say whether or not it should be in the final file given just these two files.</li>
+		<li>
+			C is in Rachel's file but not Jake's. Once again, we don't know if Rachel added it or Jake removed it so we can't say whether or not it should be in the final file.
+		</li>
+		<li>
+			E is in Jake's file but not Rachel's. So Jake may have added it, or Rachel may have removed it. We don't know.
+		</li>
+	</ul>
+
+	<p>
+	Notice that we ask if someone added it or removed it. If someone actively removed a line that was there originally, then it should be removed. If somebody added a line that wasn't there originally, then it should be added.
+	</p>
+	<p>
+	To be able to work out what should be in the merged file, we need to know what the file originally looked like. It's the same when merging in GIT. GIT will use the two commits and the original commit that these branches came from originally to work out what a merged version should look like. 
+	</p>
+	<h1>Using GitHub</h1>
+	<p>
+		Your first step would be to create an empty repository on GitHub.
+	</p>
+	<h2>Adding a Remote</h2>
+	<p>
+		You can view all of the current remotes in your repository with the command
+	</p>
+	<p><code>$ git remote</code></p>
+	<p>
+		You can add your remote with the following command
+	</p>
+	<p>
+	git remote add origin githuburl
+	</p>
+	<p>
+	Note that you're using convention here by naming the remote origin.
+	</p>
+	<p>If you do</p>
+	<p>
+		git remote -v
+	</p>
+	<p>You'll get more information. It will tell you the about the remote you have, namely the url you would fetch data from, and the url you'd push data to.</p>
+
+	<p>Now if you need to push your changes, you can do this with the following command</p>
+	<p>
+	git push origin master
+	</p>
+	<p>
+	The first argument is the name of the remote you want to send changes to, and also the name of the branch you'd like to push.
+	</p>
+	
+	<h2>Pulling Changes</h2>
+	<p>
+	If somebody makes changes to the branch that you've got in GitHub, then you will become out of sync with whats on GitHub in your local repository. To fix this, you'll need to pull.
+	</p>
+	<p>
+	<code>
+	$ git pull origin master
+	</code>
+	</p>
+
+	<h2>Forking a Repository</h2>
+	<p>
+		Forking allows you to make a copy of somebody else's repository directly on the GitHub servers. You could then pull down the code onto your own machine. This is a GitHub concept, not a Git concept, but it can be useful. To do it, you just need to be logged in to GitHub, hit the fork button on somebody else's repository and you'll have a copy that you can do what you like with.
+	</p>
+	<p>
+	It's worth noting that when you clone a repository, git will automatically set up a remote pointing to the repository you cloned from. Check it with the git remote -v command.
+	</p>
 	</body>
+
 
 
 </html>
